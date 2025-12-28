@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube MP3 Downloader</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🎵 YouTube to MP3</h1>
+
+    <input id="url" type="text" placeholder="Paste YouTube URL">
+    <button onclick="download()">Download</button>
+
+    <p id="status"></p>
+    <ul id="results"></ul>
+</div>
+
+<script>
+async function download() {
+    const url = document.getElementById("url").value;
+    const status = document.getElementById("status");
+    const results = document.getElementById("results");
+
+    status.innerText = "Downloading...";
+    results.innerHTML = "";
+
+    const res = await fetch("/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+        status.innerText = data.error;
+        return;
+    }
+
+    status.innerText = "Done!";
+
+    data.files.forEach(file => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="/download-file/${file}">${file}</a>`;
+        results.appendChild(li);
+    });
+}
+</script>
+
+</body>
+</html>
 
