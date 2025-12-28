@@ -1,1 +1,28 @@
+body {
+    background: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 400px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+a {
+    color: #1db954;
+    text-decoration: none;
+}
 
